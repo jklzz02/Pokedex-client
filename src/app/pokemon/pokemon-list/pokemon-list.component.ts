@@ -17,7 +17,7 @@ export class PokemonListComponent {
 
   ngOnInit() {
 
-    this.pokemonservice.getPokemonRange(0, 12).then(data => this.pokemons = data);
+    this.pokemonservice.getPokemonRange(0, 151).then(data => this.pokemons = data);
     
   }
 }
