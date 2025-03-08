@@ -1,7 +1,8 @@
-<div *ngIf="pokemon">
-  <h1 class="text-3xl font-bold underline">
-    {{ pokemon.name}}
-  </h1>
-  <img src="{{ pokemon.sprites.front_default }}" alt="" srcset="">
+<div *ngIf="pokemons">
+  <div *ngFor="let pokemon of pokemons">
+    <h1 class="text-3xl font-bold underline">
+      <a routerLink="">{{ pokemon.name}}</a>
+    </h1>
+  </div>
 </div>
 <router-outlet />
