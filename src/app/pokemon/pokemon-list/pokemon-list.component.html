@@ -1,0 +1,12 @@
+<div *ngIf="pokemons" class="flex flex-wrap">
+    <div *ngFor="let pokemon of pokemons" class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm {{ pokemon.types[0].type.name }}">
+        <a routerLink="/pokèmon/{{ pokemon.name }}">
+            <img class="rounded-t-lg" src="{{pokemon.sprites.other['official-artwork'].front_default}}" alt="" />
+        <div class="p-5">
+            <a href="#">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ pokemon.name }}</h5>
+            </a>
+        </div>
+        </a>
+    </div>
+</div>
