@@ -14,4 +14,9 @@ export class PokemonService {
   {
     return this.API.listPokemons(minId, maxId);      
   }
+
+  getPokemonByName(name:string)
+  {
+    return this.API.getPokemonByName(name);
+  }
 }
