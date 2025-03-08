@@ -1,5 +1,5 @@
-<div *ngIf="pokemons" class="flex flex-wrap">
-    <div *ngFor="let pokemon of pokemons" class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm {{ pokemon.types[0].type.name }}">
+<div *ngIf="pokemons" class="flex flex-wrap gap-2 mt-2 mx-auto justify-center">
+    <div *ngFor="let pokemon of pokemons" class="max-w-sm bg-white rounded-lg shadow-sm {{ pokemon.types[0].type.name }}">
         <a routerLink="/pokèmon/{{ pokemon.name }}">
             <img class="rounded-t-lg" src="{{pokemon.sprites.other['official-artwork'].front_default}}" alt="" />
         <div class="p-5">
