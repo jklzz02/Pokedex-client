@@ -12,12 +12,27 @@ export class PokemonListComponent {
 
   title = 'Pokedex';
   pokemons:IPokemonList[] = [];
+  start:number = 0;
+  chunk:number = 12;
 
   constructor(private pokemonservice:PokemonService) {}
 
   ngOnInit() {
+    this.loadPokemons();
+  }
 
-    this.pokemonservice.getPokemonRange(0, 12).then(data => this.pokemons = data);
-    
+  next() {
+    this.start += 12;
+    this.loadPokemons();
+  }
+
+  previous() {
+    if(this.start < 12) return;
+    this.start -= 12;
+    this.loadPokemons();
+  }
+
+  loadPokemons() {
+    this.pokemonservice.getPokemonRange(this.start, this.chunk).subscribe( (data) => this.pokemons = data );
   }
 }
