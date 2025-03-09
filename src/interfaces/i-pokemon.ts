@@ -83,7 +83,7 @@ export interface IPokemon {
     url: string
   }
   
-   interface Sprites {
+  export interface Sprites {
     back_default: string
     back_female: string
     back_shiny: string
@@ -345,7 +345,7 @@ export interface IPokemon {
     url: string
   }
   
-   interface Type {
+   export interface Type {
     slot: number
     type: Type2
   }

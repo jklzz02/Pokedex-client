@@ -16,7 +16,7 @@ export class PokemonService {
     return this.API.getPokemonByName(name) as Promise<IPokemon>;
   }
 
-  async getPokemonRange(minId: number = 0, maxId: number = 10): Promise<IPokemon[]> {
+  async getPokemonRange(minId: number = 0, maxId: number = 10): Promise<IPokemonList[]> {
     const data = await this.API.listPokemons(minId, maxId);
     
     const detailedPokemons = await Promise.all(
@@ -27,7 +27,7 @@ export class PokemonService {
           name: pokemonDetail.name,
           sprites: pokemonDetail.sprites,
           types: pokemonDetail.types
-        } as IPokemon;
+        } as IPokemonList;
       })
     );
   
