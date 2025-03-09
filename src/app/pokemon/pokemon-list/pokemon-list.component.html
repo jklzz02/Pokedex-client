@@ -1,9 +1,14 @@
 <div *ngIf="pokemons" class="flex flex-wrap gap-2 mt-2 mx-auto justify-center">
-    <div *ngFor="let pokemon of pokemons" class="max-w-sm bg-white rounded-lg shadow-sm {{ pokemon.types[0].type.name }}">
+    <div *ngFor="let pokemon of pokemons" class="overflow-hidden max-w-sm rounded-lg shadow-sm {{ pokemon.types[0].type.name }}">
         <a routerLink="/pokèmon/{{ pokemon.name }}">
+            <h5 class="mx-3 mt-3 text-2xl font-bold tracking-tight text-white">{{ pokemon.id }} {{ pokemon.name | titlecase}}</h5>
             <img class="rounded-t-lg" src="{{pokemon.sprites.other['official-artwork'].front_default}}" alt="" />
-        <div class="p-5">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">{{ pokemon.id }} {{ pokemon.name }}</h5>
+        <div class="p-5 bg-[linear-gradient(to_top,rgba(82,82,82,1),rgba(82,82,82,0))]">
+            <div class="flex justify-end gap-2">
+                <div *ngFor="let typeObj of pokemon.types" class="type-icon {{typeObj.type.name}}-icon">
+                    <img [src]="'/assets/icons/' + typeObj.type.name + '.svg'" />
+                </div>
+            </div>
         </div>
         </a>
     </div>

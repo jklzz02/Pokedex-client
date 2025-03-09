@@ -1,71 +1,71 @@
 .normal {
-    background-image: linear-gradient(45deg, var(--normal-type-color), rgba(255, 255, 255, 0.2));
+    background-image: linear-gradient(45deg, var(--normal-type-color), rgba(0, 0, 0, 0.2));
 }
 
 .fire {
-    background-image: linear-gradient(45deg, var(--fire-type-color), rgba(255, 255, 255, 0.2));
+    background-image: linear-gradient(45deg, var(--fire-type-color), rgba(0, 0, 0, 0.2));
 }
 
 .water {
-    background-image: linear-gradient(45deg, var(--water-type-color), rgba(255, 255, 255, 0.2));
+    background-image: linear-gradient(45deg, var(--water-type-color), rgba(0, 0, 0, 0.2));
 }
 
 .electric {
-    background-image: linear-gradient(45deg, var(--electric-type-color), rgba(255, 255, 255, 0.2));
+    background-image: linear-gradient(45deg, var(--electric-type-color), rgba(0, 0, 0, 0.2));
 }
 
 .grass {
-    background-image: linear-gradient(45deg, var(--grass-type-color), rgba(255, 255, 255, 0.2));
+    background-image: linear-gradient(45deg, var(--grass-type-color), rgba(0, 0, 0, 0.2));
 }
 
 .ice {
-    background-image: linear-gradient(45deg, var(--ice-type-color), rgba(255, 255, 255, 0.2));
+    background-image: linear-gradient(45deg, var(--ice-type-color), rgba(0, 0, 0, 0.2));
 }
 
 .fighting {
-    background-image: linear-gradient(45deg, var(--fighting-type-color), rgba(255, 255, 255, 0.2));
+    background-image: linear-gradient(45deg, var(--fighting-type-color), rgba(0, 0, 0, 0.2));
 }
 
 .poison {
-    background-image: linear-gradient(45deg, var(--poison-type-color), rgba(255, 255, 255, 0.2));
+    background-image: linear-gradient(45deg, var(--poison-type-color), rgba(0, 0, 0, 0.2));
 }
 
 .ground {
-    background-image: linear-gradient(45deg, var(--ground-type-color), rgba(255, 255, 255, 0.2));
+    background-image: linear-gradient(45deg, var(--ground-type-color), rgba(0, 0, 0, 0.2));
 }
 
 .flying {
-    background-image: linear-gradient(45deg, var(--flying-type-color), rgba(255, 255, 255, 0.2));
+    background-image: linear-gradient(45deg, var(--flying-type-color), rgba(0, 0, 0, 0.2));
 }
 
 .psychic {
-    background-image: linear-gradient(45deg, var(--psychic-type-color), rgba(255, 255, 255, 0.2));
+    background-image: linear-gradient(45deg, var(--psychic-type-color), rgba(0, 0, 0, 0.2));
 }
 
 .bug {
-    background-image: linear-gradient(45deg, var(--bug-type-color), rgba(255, 255, 255, 0.2));
+    background-image: linear-gradient(45deg, var(--bug-type-color), rgba(0, 0, 0, 0.2));
 }
 
 .rock {
-    background-image: linear-gradient(45deg, var(--rock-type-color), rgba(255, 255, 255, 0.2));
+    background-image: linear-gradient(45deg, var(--rock-type-color), rgba(0, 0, 0, 0.2));
 }
 
 .ghost {
-    background-image: linear-gradient(45deg, var(--ghost-type-color), rgba(255, 255, 255, 0.2));
+    background-image: linear-gradient(45deg, var(--ghost-type-color), rgba(0, 0, 0, 0.2));
 }
 
 .dragon {
-    background-image: linear-gradient(45deg, var(--dragon-type-color), rgba(255, 255, 255, 0.2));
+    background-image: linear-gradient(45deg, var(--dragon-type-color), rgba(0, 0, 0, 0.2));
 }
 
 .dark {
-    background-image: linear-gradient(45deg, var(--dark-type-color), rgba(255, 255, 255, 0.2));
+    background-image: linear-gradient(45deg, var(--dark-type-color), rgba(0, 0, 0, 0.2));
 }
 
 .steel {
-    background-image: linear-gradient(45deg, var(--steel-type-color), rgba(255, 255, 255, 0.2));
+    background-image: linear-gradient(45deg, var(--steel-type-color), rgba(0, 0, 0, 0.2));
 }
 
 .fairy {
-    background-image: linear-gradient(45deg, var(--fairy-type-color), rgba(255, 255, 255, 0.2));
+    background-image: linear-gradient(45deg, var(--fairy-type-color), rgba(0, 0, 0, 0.2));
 }
