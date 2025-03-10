@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../../../services/pokemon.service';
 import { ActivatedRoute } from '@angular/router';
 import { IPokemon } from '../../../interfaces/i-pokemon';
+import { FlavorText } from 'pokenode-ts';
 
 @Component({
   selector: 'pokemon-detail',
@@ -13,7 +14,9 @@ export class PokemonDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private pokemonservice:PokemonService){}
 
+  private descriptions:string[] = [];
   pokemon:IPokemon | null = null;
+  uniqueDescriptions:Set<string> | null = null;
   shiny:boolean = false;
 
   ngOnInit(): void {
@@ -21,6 +24,17 @@ export class PokemonDetailComponent implements OnInit {
     if(pokemonName) {
         this.pokemonservice.getPokemonByName(pokemonName)
                            .then( (data) => this.pokemon = data as IPokemon);
+        
+        this.pokemonservice.getPokemonDescription(pokemonName).then( (data) => {
+
+          for(let flavor of data.flavor_text_entries) {
+              if(flavor.language.name.toLowerCase() == 'en') {
+                 this.descriptions.push(flavor.flavor_text);
+              }
+            }
+
+           this.uniqueDescriptions = new Set(this.descriptions);
+        })
       }
   }
 

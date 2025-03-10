@@ -5,7 +5,11 @@
     
     <audio controls>
         <source src="{{pokemon.cries.latest}}" type="audio/ogg">
-    </audio> 
+    </audio>
+
+    <div *ngFor="let flavorText of uniqueDescriptions">
+        {{ flavorText }}
+    </div>
 
     <button (click)="showShiny()" class="bg-blue-500 cursor-pointer hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
         Show Shiny

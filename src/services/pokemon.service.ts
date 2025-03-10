@@ -34,4 +34,8 @@ export class PokemonService {
       )
     );
   }
+
+  getPokemonDescription(name:string) {
+    return this.API.getPokemonSpeciesByName(name);
+  }
 }
