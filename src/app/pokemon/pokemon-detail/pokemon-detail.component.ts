@@ -14,6 +14,7 @@ export class PokemonDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute, private pokemonservice:PokemonService){}
 
   pokemon:IPokemon | null = null;
+  shiny:boolean = false;
 
   ngOnInit(): void {
     let pokemonName = this.route.snapshot.paramMap.get('pokemon');
@@ -21,5 +22,9 @@ export class PokemonDetailComponent implements OnInit {
         this.pokemonservice.getPokemonByName(pokemonName)
                            .then( (data) => this.pokemon = data as IPokemon);
       }
+  }
+
+  showShiny(): void {
+      this.shiny = !this.shiny;
   }
 }

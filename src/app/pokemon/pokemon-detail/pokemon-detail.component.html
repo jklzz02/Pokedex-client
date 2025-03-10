@@ -1,6 +1,15 @@
 <div *ngIf="pokemon">
-    <img src="{{ pokemon.sprites.front_default}}" alt="">
+    <img *ngIf="!shiny" src="{{ pokemon.sprites.other['official-artwork'].front_default}}" alt="{{ pokemon.name }}">
+    <img *ngIf="shiny" src="{{ pokemon.sprites.other['official-artwork'].front_shiny}}" alt="{{ pokemon.name }} shiny">
     <h1>{{ pokemon.name }}</h1>
+    
+    <audio controls>
+        <source src="{{pokemon.cries.latest}}" type="audio/ogg">
+    </audio> 
+
+    <button (click)="showShiny()" class="bg-blue-500 cursor-pointer hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Show Shiny
+    </button>
 </div>
 
 <div *ngIf="!pokemon" role="status">
