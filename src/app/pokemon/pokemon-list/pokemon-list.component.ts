@@ -14,6 +14,7 @@ export class PokemonListComponent {
   pokemons: IPokemonList[] = [];
   start: number = 0;
   chunk: number = 12;
+  loading: boolean = true;
   pokemonRefreshSubject = new Subject<void>();
 
   constructor(private pokemonservice: PokemonService) {}
@@ -21,6 +22,7 @@ export class PokemonListComponent {
   ngOnInit() {
     this.pokemonRefreshSubject.subscribe({
       next: () => {
+        this.loading = true;
         this.loadPokemons();
       },
     });
@@ -41,6 +43,9 @@ export class PokemonListComponent {
   loadPokemons() {
     this.pokemonservice
       .getPokemonRange(this.start, this.chunk)
-      .subscribe((data) => (this.pokemons = data));
+      .subscribe((data) => {
+        this.pokemons = data;
+        this.loading = false;
+      });
   }
 }
