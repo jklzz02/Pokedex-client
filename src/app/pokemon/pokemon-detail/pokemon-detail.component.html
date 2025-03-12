@@ -14,6 +14,16 @@
     <button (click)="showShiny()" class="bg-blue-500 cursor-pointer hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
         Show Shiny
     </button>
+
+    {{ pokemon.weight }}
+    <br>
+    <ul>
+        <li *ngFor="let stat of pokemon.stats">
+            Base {{stat.stat.name}}: {{ stat.base_stat }}
+            <br>
+            Effort: {{ stat.effort }}
+        </li>
+    </ul>
 </div>
 
 <div *ngIf="!pokemon" role="status">

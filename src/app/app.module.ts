@@ -16,7 +16,6 @@ import { PokemonListComponent } from './pokemon/pokemon-list/pokemon-list.compon
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

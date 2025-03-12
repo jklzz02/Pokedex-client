@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../../../services/pokemon.service';
 import { ActivatedRoute } from '@angular/router';
 import { IPokemon } from '../../../interfaces/i-pokemon';
-import { FlavorText } from 'pokenode-ts';
 
 @Component({
   selector: 'pokemon-detail',
@@ -22,11 +21,9 @@ export class PokemonDetailComponent implements OnInit {
   shiny: boolean = false;
 
   ngOnInit(): void {
+
     let pokemonName = this.route.snapshot.paramMap.get('pokemon');
     if (pokemonName) {
-      // this.pokemonservice.getPokemonByName(pokemonName)
-      //                    .then( (data) => this.pokemon = data as IPokemon);
-
       this.pokemonservice.getPokemonDetails(pokemonName).subscribe((data) => {
         this.pokemon = data[0] as IPokemon;
         this.descriptions = data[1].flavor_text_entries
@@ -35,6 +32,7 @@ export class PokemonDetailComponent implements OnInit {
         this.uniqueDescriptions = new Set(this.descriptions);
       });
     }
+    
   }
 
   showShiny(): void {
