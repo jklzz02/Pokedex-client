@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
+import { IPokemon } from '../../interfaces/i-pokemon';
 
 @Component({
   selector: 'app-radar',
@@ -7,24 +8,23 @@ import { ChartConfiguration } from 'chart.js';
   templateUrl: './radar.component.html',
   styleUrl: './radar.component.css',
 })
-export class RadarComponent {
-  title = 'ng2-charts-demo';
+export class RadarComponent implements OnChanges{
 
-  public radarChartOptions: ChartConfiguration<'radar'>['options'] = {
-    responsive: false,
-  };
-  public radarChartLabels: string[] = [
-    'Eating',
-    'Drinking',
-    'Sleeping',
-    'Designing',
-    'Coding',
-    'Cycling',
-    'Running',
-  ];
+  @Input()
+  pokemon:IPokemon | null = null;
+  title = 'pokemon-stats-char';
+  radarChartOptions: ChartConfiguration<'radar'>['options'] = { responsive: true,};
+  radarChartLabels: string[] = [];
+  radarChartDatasets: ChartConfiguration<'radar'>['data']['datasets'] = [];
 
-  public radarChartDatasets: ChartConfiguration<'radar'>['data']['datasets'] = [
-    { data: [65, 59, 90, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 96, 27, 100], label: 'Series B' },
-  ];
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes["pokemon"] != null && changes["pokemon"] != undefined)
+    {
+      let statsName = this.pokemon?.stats.map(x => x.stat.name) ?? [];
+      let statValue = this.pokemon?.stats.map(x => x.base_stat) ?? [];
+      this.radarChartLabels = statsName;
+      this.radarChartDatasets = [{ data: statValue, label: this.pokemon?.name +'\'s stats' },];
+    }
+  }
+
 }

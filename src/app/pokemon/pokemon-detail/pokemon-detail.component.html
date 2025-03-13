@@ -1,4 +1,6 @@
-<div *ngIf="pokemon">
+<div *ngIf="pokemon" class="flex align-center justify-center">
+  <div>
+
   <img
     *ngIf="!shiny"
     src="{{ pokemon.sprites.other['official-artwork'].front_default }}"
@@ -25,16 +27,10 @@
   >
     Show Shiny
   </button>
-
-  {{ pokemon.weight }}
-  <br />
-  <ul>
-    <li *ngFor="let stat of pokemon.stats">
-      Base {{ stat.stat.name }}: {{ stat.base_stat }}
-      <br />
-      Effort: {{ stat.effort }}
-    </li>
-  </ul>
+  weight: {{ pokemon.weight }}
+  height: {{ pokemon.height }}
+  </div>
+  <app-radar [pokemon]="pokemon"></app-radar>
 </div>
 
 <div *ngIf="!pokemon" role="status">
@@ -56,4 +52,3 @@
   </svg>
   <span class="sr-only">Loading...</span>
 </div>
-<app-radar></app-radar>
