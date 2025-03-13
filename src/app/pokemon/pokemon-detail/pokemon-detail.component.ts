@@ -19,6 +19,7 @@ export class PokemonDetailComponent implements OnInit {
   pokemon: IPokemon | null = null;
   uniqueDescriptions: Set<string> | null = null;
   shiny: boolean = false;
+  buttonLabel = 'show shiny'
 
   ngOnInit(): void {
 
@@ -37,5 +38,6 @@ export class PokemonDetailComponent implements OnInit {
 
   showShiny(): void {
     this.shiny = !this.shiny;
+    this.buttonLabel = this.shiny ? 'show shiny' : 'show normal';
   }
 }
