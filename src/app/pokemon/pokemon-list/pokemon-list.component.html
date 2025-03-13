@@ -1,6 +1,6 @@
 <div class="flex">
-    <button (click)="previous()">
-        <i class="bi bi-caret-left-fill text-6xl cursor-pointer hover:opacity-70 scale-95"></i>
+    <button (click)="previous()" class="hover:-translate-x-2 transition delay-150 duration-200 ease-in-out">
+        <i class="bi bi-chevron-compact-left text-gray-600 text-6xl cursor-pointer hover:opacity-70"></i>
     </button>
     <div *ngIf="!loading" class="grid grid-cols-12 gap-2 mx-auto justify-center">
         <div *ngFor="let pokemon of pokemons" class="overflow-hidden max-w-sm rounded-lg shadow-sm col-span-2 {{ pokemon.types[0].type.name }}">
@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <button (click)="next()">
-        <i class="bi bi-caret-right-fill text-6xl cursor-pointer hover:opacity-70 scale-95"></i>
+    <button (click)="next()" class="hover:translate-x-1/4 transition delay-150 duration-200 ease-in-out">
+        <i class="bi bi-chevron-compact-right text-gray-600 text-6xl cursor-pointer hover:opacity-70"></i>
     </button>
 </div>
