@@ -17,7 +17,7 @@ export class PokemonService {
 
   getPokemonRange(
     minId: number = 0,
-    maxId: number = 10
+    maxId: number = 12
   ): Observable<IPokemonList[]> {
     return from(this.API.listPokemons(minId, maxId)).pipe(
       mergeMap((response) =>
