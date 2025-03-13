@@ -5,17 +5,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PokemonDetailComponent } from './pokemon/pokemon-detail/pokemon-detail.component';
 import { PokemonListComponent } from './pokemon/pokemon-list/pokemon-list.component';
-
+import { RadarComponent } from './radar/radar.component';
+import {
+  BaseChartDirective,
+  provideCharts,
+  withDefaultRegisterables,
+} from 'ng2-charts';
 @NgModule({
   declarations: [
     AppComponent,
     PokemonDetailComponent,
-    PokemonListComponent
+    PokemonListComponent,
+    RadarComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  bootstrap: [AppComponent]
+  imports: [BrowserModule, AppRoutingModule, BaseChartDirective],
+  providers: [provideCharts(withDefaultRegisterables())],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
