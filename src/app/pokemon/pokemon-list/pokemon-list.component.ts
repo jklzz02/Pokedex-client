@@ -12,76 +12,61 @@ import { Subject } from 'rxjs';
 export class PokemonListComponent {
 
   private cache:IPokemonList[] = [];
-  private cacheStart:number = 0;
-  private cacheCount:number = 0;
   title = 'Pokedex';
   pokemons: IPokemonList[] = [];
   start: number = 0;
   chunk: number = 12;
   loading: boolean = true;
-  pokemonRefreshSubject = new Subject<boolean>();
+  pokemonRefreshSubject = new Subject<void>();
 
   constructor(private pokemonservice: PokemonService) {}
 
   ngOnInit() {
     this.pokemonRefreshSubject.subscribe({
-      next: (forward:boolean) => {
+      next: () => {
         this.loading = true;
-        this.loadPokemons(forward);
+        this.loadPokemons();
       },
     });
-    this.pokemonRefreshSubject.next(true);
+    this.pokemonRefreshSubject.next();
   }
 
   next() {
     this.start += 12;
-    this.pokemonRefreshSubject.next(true);
+    this.pokemonRefreshSubject.next();
   }
 
   previous() {
     if (this.start < 12) return;
     this.start -= 12;
-    this.pokemonRefreshSubject.next(false);
+    this.pokemonRefreshSubject.next();
   }
 
-  loadPokemons(forward:boolean) {
+  loadPokemons() {
 
     /**
      * TO DO
-     * change logic to adapt to thw concat version of the cache
+     * review logic thoroughly to ensure that the cache
+     * works as intended
      */
-    if(this.cacheCount > 0) {
 
-      if(forward){
-        if(!((this.cacheStart + this.chunk) > this.cache.length))
-        {
-          this.cacheStart += this.chunk;
-        }
-        this.pokemons = this.cache.slice(this.cacheStart, this.cacheStart + this.chunk);
-      }else{
-
-        if(!((this.cacheStart - this.chunk) > this.cache.length))
-        {
-            this.cacheStart -= this.chunk;
-        }
-        this.pokemons = this.cache.slice(this.cacheStart, this.cacheStart + this.chunk);
-      }
-
+    if(this.start + this.chunk < this.cache.length){
+      
+      this.pokemons = this.cache.slice(this.start, this.start + this.chunk);
       this.loading = false;
-      --this.cacheCount;
       return;
     }
 
-    this.cacheCount = 5;
     this.pokemonservice
       .getPokemonRange(this.start, this.chunk*5)
       .subscribe((data) => {
         /**
          * TO DO
-         * try to use concat, the cache needs to grow instead of being overwritten
+         * refactor the code in a cleaner way
          */
-        this.cache = data
-        this.pokemons = this.cache.slice(this.cacheStart, this.cacheStart + this.chunk)
+        this.cache = this.cache.concat(data);
+        this.cache = Array.from(new Set(this.cache));
+        this.pokemons = this.cache.slice(this.start, this.start + this.chunk)
         this.loading = false;
       });
   }
