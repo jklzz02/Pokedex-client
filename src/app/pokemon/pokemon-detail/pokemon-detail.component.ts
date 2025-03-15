@@ -16,8 +16,10 @@ export class PokemonDetailComponent implements OnInit {
   ) {}
 
   private descriptions: string[] = [];
+  private uniqueDescriptions: string[] = [];
+  private descriptionStart = 0;
+  description:string = '';
   pokemon: IPokemon | null = null;
-  uniqueDescriptions: Set<string> | null = null;
   shiny: boolean = false;
   buttonLabel = 'show shiny'
 
@@ -30,7 +32,8 @@ export class PokemonDetailComponent implements OnInit {
         this.descriptions = data[1].flavor_text_entries
           .filter((flavor) => flavor.language.name.toLowerCase() == 'en')
           .map((x) => x.flavor_text);
-        this.uniqueDescriptions = new Set(this.descriptions);
+        this.uniqueDescriptions = Array.from(new Set(this.descriptions));
+        this.description = this.uniqueDescriptions[this.descriptionStart];
       });
     }
     
@@ -39,5 +42,24 @@ export class PokemonDetailComponent implements OnInit {
   showShiny(): void {
     this.shiny = !this.shiny;
     this.buttonLabel = this.shiny ? 'show shiny' : 'show normal';
+  }
+
+  nexDescription(): void{
+
+      if(this.descriptionStart == this.uniqueDescriptions.length -1) {
+        this.descriptionStart = 0;
+      }
+      ++this.descriptionStart;
+      this.description = this.uniqueDescriptions[this.descriptionStart + 1];
+    }
+
+  previousDescription(): void{
+
+    if(this.descriptionStart == 0) {
+      this.descriptionStart = this.uniqueDescriptions.length;
+    }
+
+    --this.descriptionStart;
+    this.description = this.uniqueDescriptions[this.descriptionStart -1];
   }
 }

@@ -22,8 +22,9 @@ export class RadarComponent implements OnChanges{
     {
       let statsName = this.pokemon?.stats.map(x => x.stat.name) ?? [];
       let statValue = this.pokemon?.stats.map(x => x.base_stat) ?? [];
+      let statEffort = this.pokemon?.stats.map(x => x.effort) ?? [];
       this.radarChartLabels = statsName;
-      this.radarChartDatasets = [{ data: statValue, label: this.pokemon?.name +'\'s stats' },];
+      this.radarChartDatasets = [{ data: statValue, label: this.pokemon?.name +'\'s stats' }, { data: statEffort, label: 'effort'}];
     }
   }
 

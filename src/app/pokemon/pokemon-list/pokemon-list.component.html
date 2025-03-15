@@ -1,8 +1,5 @@
 <div class="flex">
-  <button
-    (click)="previous()"
-    class="hover:-translate-x-2 transition delay-150 duration-200 ease-in-out"
-  >
+  <button (click)="previous()">
     <i
       class="bi bi-chevron-compact-left text-gray-600 text-6xl cursor-pointer hover:opacity-70"
     ></i>
@@ -41,7 +38,7 @@
 
   <div
     *ngIf="loading"
-    class="grid grid-cols-12 gap-2 mt-2 mx-auto justify-center"
+    class="grid grid-cols-12 gap-2 mx-auto justify-center"
   >
     <div
       *ngFor="let item of [].constructor(12)"
@@ -63,10 +60,7 @@
     </div>
   </div>
 
-  <button
-    (click)="next()"
-    class="hover:translate-x-1/4 transition delay-150 duration-200 ease-in-out"
-  >
+  <button (click)="next()">
     <i
       class="bi bi-chevron-compact-right text-gray-600 text-6xl cursor-pointer hover:opacity-70"
     ></i>

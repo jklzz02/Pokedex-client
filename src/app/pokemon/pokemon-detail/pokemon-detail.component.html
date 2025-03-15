@@ -17,9 +17,11 @@
     <source src="{{ pokemon.cries.latest }}" type="audio/ogg" />
   </audio>
 
-  <div *ngFor="let flavorText of uniqueDescriptions">
-    {{ flavorText }}
-  </div>
+    <div (click)="previousDescription()" class="flex">
+      <button class="cursor-pointer"><i class="bi bi-chevron-compact-left text-blue-600"></i></button>
+        <div>{{ description }}</div>
+      <button (click)="nexDescription()" class="cursor-pointer"><i class="bi bi-chevron-compact-right text-blue-600"></i></button>
+    </div>
 
   <button (click)="showShiny()" class="bg-blue-500 cursor-pointer hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
     {{ buttonLabel }}
