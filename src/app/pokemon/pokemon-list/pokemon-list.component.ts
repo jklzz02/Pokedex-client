@@ -11,7 +11,6 @@ import { Subject } from 'rxjs';
 })
 export class PokemonListComponent {
 
-  private cache:IPokemonList[] = [];
   title = 'Pokedex';
   pokemons: IPokemonList[] = [];
   start: number = 0;
@@ -44,29 +43,10 @@ export class PokemonListComponent {
 
   loadPokemons() {
 
-    /**
-     * TO DO
-     * review logic thoroughly to ensure that the cache
-     * works as intended
-     */
-
-    if(this.start + this.chunk < this.cache.length){
-      
-      this.pokemons = this.cache.slice(this.start, this.start + this.chunk);
-      this.loading = false;
-      return;
-    }
-
     this.pokemonservice
-      .getPokemonRange(this.start, this.chunk*5)
+      .getPokemonRange(this.start, this.chunk)
       .subscribe((data) => {
-        /**
-         * TO DO
-         * refactor the code in a cleaner way
-         */
-        this.cache = this.cache.concat(data);
-        this.cache = Array.from(new Set(this.cache));
-        this.pokemons = this.cache.slice(this.start, this.start + this.chunk)
+        this.pokemons = data
         this.loading = false;
       });
   }
