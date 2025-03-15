@@ -23,6 +23,15 @@
       <button (click)="nexDescription()" class="cursor-pointer"><i class="bi bi-chevron-compact-right text-blue-600"></i></button>
     </div>
 
+  <ul>
+    <li *ngFor="let ability of pokemon.abilities">
+      <span
+      *ngIf="ability.is_hidden"
+      class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-gray-700 dark:text-gray-300"
+      >Hidden</span>
+      {{ ability.ability.name }} slot: {{ ability.slot }}
+    </li>
+  </ul>
   <button (click)="showShiny()" class="bg-blue-500 cursor-pointer hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
     {{ buttonLabel }}
   </button>
