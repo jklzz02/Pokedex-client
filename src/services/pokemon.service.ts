@@ -40,6 +40,11 @@ export class PokemonService {
     );
   }
 
+  getPokemonRangeBatch(startPages: number[], chunk: number): Observable<IPokemonList[][]> {
+    const requests = startPages.map((start) => this.getPokemonRange(start, chunk));
+    return forkJoin(requests);
+  }
+
   getPokemonDetails(name: string): Observable<[Pokemon, PokemonSpecies]> {
     return forkJoin([
       from(this.API.getPokemonByName(name)),
