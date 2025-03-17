@@ -40,6 +40,10 @@ export class PokemonDetailComponent implements OnInit {
           .map((x) => x.flavor_text);
         this.uniqueDescriptions = Array.from(new Set(this.descriptions));
         this.description = this.uniqueDescriptions[this.descriptionStart];
+      }, 
+      (error) => {
+        console.log(error)
+        this.router.navigateByUrl('not-found');
       });
     
   }
