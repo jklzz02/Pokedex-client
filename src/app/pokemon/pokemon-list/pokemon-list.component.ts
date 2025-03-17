@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { PokemonService } from '../../../services/pokemon.service';
 import { IPokemonList } from '../../../interfaces/i-pokemon-list';
-import { Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

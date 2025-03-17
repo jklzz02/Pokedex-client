@@ -11,12 +11,14 @@ import {
   provideCharts,
   withDefaultRegisterables,
 } from 'ng2-charts';
+import { NotFoundComponent } from './not-found/not-found.component';
 @NgModule({
   declarations: [
     AppComponent,
     PokemonDetailComponent,
     PokemonListComponent,
     RadarComponent,
+    NotFoundComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BaseChartDirective],
   providers: [provideCharts(withDefaultRegisterables())],
