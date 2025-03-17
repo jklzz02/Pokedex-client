@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../../../services/pokemon.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IPokemon } from '../../../interfaces/i-pokemon';
 
 @Component({
@@ -12,6 +12,7 @@ import { IPokemon } from '../../../interfaces/i-pokemon';
 export class PokemonDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private pokemonservice: PokemonService
   ) {}
 
@@ -25,9 +26,14 @@ export class PokemonDetailComponent implements OnInit {
 
   ngOnInit(): void {
 
-    let pokemonName = this.route.snapshot.paramMap.get('pokemon');
-    if (pokemonName) {
+    let pokemonName = this.route.snapshot.paramMap.get('pokemon') ?? '';
+
+      if (!pokemonName) {
+        this.router.navigateByUrl('not-found')
+      }
+
       this.pokemonservice.getPokemonDetails(pokemonName).subscribe((data) => {
+
         this.pokemon = data[0] as IPokemon;
         this.descriptions = data[1].flavor_text_entries
           .filter((flavor) => flavor.language.name.toLowerCase() == 'en')
@@ -35,7 +41,6 @@ export class PokemonDetailComponent implements OnInit {
         this.uniqueDescriptions = Array.from(new Set(this.descriptions));
         this.description = this.uniqueDescriptions[this.descriptionStart];
       });
-    }
     
   }
 

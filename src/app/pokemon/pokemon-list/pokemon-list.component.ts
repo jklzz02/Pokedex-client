@@ -19,7 +19,7 @@ export class PokemonListComponent implements OnInit, OnDestroy {
   start: number = 0;
   chunk: number = 12;
   loading: boolean = true;
-  cachePagesAhead: number = 5;
+  totalPagesToCache: number = 8;
 
 
   constructor(
@@ -31,9 +31,13 @@ export class PokemonListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
-      const page = Number(params.get('page')) ?? 1;
-      this.start = page === this.firstPage ? 0 : page * this.chunk;
+      const page = Number(params.get('page')) ?? this.firstPage;
 
+      if(Number.isNaN(page) || page < 0){
+        this.router.navigateByUrl('not-found');
+      }
+
+      this.start = page === this.firstPage ? 0 : page * this.chunk;
       this.loading = true;
       this.loadPokemons(page);
     });
@@ -68,22 +72,37 @@ export class PokemonListComponent implements OnInit, OnDestroy {
   }
 
   prefetchPages(startPage: number) {
-    const pagesToFetch = [];
-    for (let i = 0; i < this.cachePagesAhead; i++) {
-      const pageNumber = startPage + i;
-      if (pageNumber <= this.lastPage) {
-        const pageStart = pageNumber === this.firstPage ? 0 : pageNumber * this.chunk;
-        pagesToFetch.push(pageStart);
-      }
-    }
+    const pagesToFetch = new Set<number>();
+    const pagesToCache = this.totalPagesToCache / 2;
 
-    this.pokemonService.getPokemonRangeBatch(pagesToFetch, this.chunk).subscribe((data) => {
+    pagesToFetch.add(startPage);
+  
+    for (let i = 1; i <= pagesToCache; i++) {
+      let prevPage = startPage - i;
+      if (prevPage < this.firstPage) {
+        prevPage = this.lastPage - (this.firstPage - prevPage - 1);
+      }
+      pagesToFetch.add(prevPage);
+    }
+  
+    for (let i = 1; i <= pagesToCache; i++) {
+      let nextPage = startPage + i;
+      if (nextPage > this.lastPage) {
+        nextPage = this.firstPage + (nextPage - this.lastPage - 1);
+      }
+      pagesToFetch.add(nextPage);
+    }
+  
+    const pagesArray = Array.from(pagesToFetch).sort((a, b) => a - b);
+    const pagesStartIndexes = pagesArray.map(page => (page === this.firstPage ? 0 : page * this.chunk));
+  
+    this.pokemonService.getPokemonRangeBatch(pagesStartIndexes, this.chunk).subscribe((data) => {
       data.forEach((pokemons, index) => {
-        const pageNumber = startPage + index;
+        const pageNumber = pagesArray[index];
         const cacheKey = `pokemons-${pageNumber}`;
         this.cacheService.set(cacheKey, pokemons);
       });
-
+  
       this.pokemons = this.cacheService.get(`pokemons-${startPage}`) || [];
       this.loading = false;
     });
