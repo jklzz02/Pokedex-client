@@ -19,7 +19,7 @@ export class PokemonListComponent implements OnInit, OnDestroy {
   start: number = 0;
   chunk: number = 12;
   loading: boolean = true;
-  totalPagesToCache: number = 8;
+  totalPagesToCache: number = 16;
 
 
   constructor(
@@ -73,11 +73,12 @@ export class PokemonListComponent implements OnInit, OnDestroy {
 
   prefetchPages(startPage: number) {
     const pagesToFetch = new Set<number>();
-    const pagesToCache = this.totalPagesToCache / 2;
+    const previousPagesToCache = 4;
+    const nextPagesToCache = this.totalPagesToCache - previousPagesToCache
 
     pagesToFetch.add(startPage);
   
-    for (let i = 1; i <= pagesToCache; i++) {
+    for (let i = 1; i <= previousPagesToCache; i++) {
       let prevPage = startPage - i;
       if (prevPage < this.firstPage) {
         prevPage = this.lastPage - (this.firstPage - prevPage - 1);
@@ -85,7 +86,7 @@ export class PokemonListComponent implements OnInit, OnDestroy {
       pagesToFetch.add(prevPage);
     }
   
-    for (let i = 1; i <= pagesToCache; i++) {
+    for (let i = 1; i <= nextPagesToCache; i++) {
       let nextPage = startPage + i;
       if (nextPage > this.lastPage) {
         nextPage = this.firstPage + (nextPage - this.lastPage - 1);

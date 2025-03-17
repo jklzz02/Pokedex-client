@@ -10,7 +10,7 @@ export class CacheService {
 
   set(key: string, data: any[]): void {
     if (this.cache.has(key)) {
-     this.clear(key);
+     return;
     }
     this.cache.set(key, data);
     this.cache$.next(new Map(this.cache));
