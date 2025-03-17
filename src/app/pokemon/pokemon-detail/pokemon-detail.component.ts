@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../../../services/pokemon.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IPokemon } from '../../../interfaces/i-pokemon';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'pokemon-detail',
@@ -11,6 +12,7 @@ import { IPokemon } from '../../../interfaces/i-pokemon';
 })
 export class PokemonDetailComponent implements OnInit {
   constructor(
+    private title: Title,
     private route: ActivatedRoute,
     private router: Router,
     private pokemonservice: PokemonService
@@ -40,6 +42,7 @@ export class PokemonDetailComponent implements OnInit {
           .map((x) => x.flavor_text);
         this.uniqueDescriptions = Array.from(new Set(this.descriptions));
         this.description = this.uniqueDescriptions[this.descriptionStart];
+        this.title.setTitle(this.pokemon.name)
       }, 
       (error) => {
         console.log(error)
