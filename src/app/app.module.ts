@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PokemonDetailComponent } from './pokemon/pokemon-detail/pokemon-detail.component';
@@ -12,6 +11,8 @@ import {
   withDefaultRegisterables,
 } from 'ng2-charts';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { provideHttpClient } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
     NotFoundComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BaseChartDirective],
-  providers: [provideCharts(withDefaultRegisterables())],
+  providers: [
+    provideCharts(withDefaultRegisterables()),
+    provideHttpClient()
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

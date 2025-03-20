@@ -3,13 +3,16 @@ import { Pokemon, PokemonClient, PokemonSpecies } from 'pokenode-ts';
 import { IPokemon } from '../interfaces/i-pokemon';
 import { IPokemonList } from '../interfaces/i-pokemon-list';
 import { forkJoin, from, map, mergeMap, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { IPokemonSuggestion } from '../interfaces/i-pokemon-suggestion';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PokemonService {
-  constructor() {}
+  constructor(private http:HttpClient) {}
   private API = new PokemonClient();
+  private PokemonListAsset: string = 'assets/data/pokemon-list.json'
 
   getPokemonByName(name: string): Promise<IPokemon> {
     return this.API.getPokemonByName(name) as Promise<IPokemon>;
@@ -38,6 +41,10 @@ export class PokemonService {
         )
       )
     );
+  }
+
+  getPokemonSuggestionsList(): Observable<IPokemonSuggestion[]>{
+    return this.http.get<IPokemonSuggestion[]>(this.PokemonListAsset);
   }
 
   getPokemonRangeBatch(startPages: number[], chunk: number): Observable<IPokemonList[][]> {
