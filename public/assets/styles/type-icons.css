@@ -100,3 +100,25 @@
     background: #539DDF;
     box-shadow: 0 0 20px #539DDF;
 }
+
+@media (prefers-color-scheme: dark) {
+    .bug-icon,
+    .dragon-icon,
+    .electric-icon,
+    .fire-icon,
+    .fairy-icon,
+    .fighting-icon,
+    .flying-icon,
+    .ghost-icon,
+    .grass-icon,
+    .ground-icon,
+    .ice-icon,
+    .normal-icon,
+    .poison-icon,
+    .psychic-icon,
+    .rock-icon,
+    .steel-icon,
+    .water-icon {
+        box-shadow: none !important;
+    }
+}
