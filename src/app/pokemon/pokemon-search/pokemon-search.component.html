@@ -18,11 +18,12 @@
     <ul 
     *ngIf="suggestions.length"
     class="absolute left-0 w-full bg-white border border-gray-300 rounded-lg shadow-md z-50 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-        <li class="flex gap-1 p-2 hover:bg-gray-100 dark:hover:bg-gray-500" *ngFor="let suggestion of suggestions">
-            <a routerLink="/pokemon/{{suggestion.id}}">{{ suggestion.name }}</a>
-            <div class="flex">
+        <li class="flex gap-1 p-2 hover:bg-gray-100 dark:hover:bg-gray-600" *ngFor="let suggestion of suggestions">
+            <a class="flex gap-1 p-2 w-full" routerLink="/pokemon/{{suggestion.id}}">{{ suggestion.name }}
+                <div class="flex">
                 <img *ngFor="let type of suggestion.types" class="{{type}}-icon suggestion-icon" src="/assets/icons/{{type}}.svg" alt="">
-            </div>
+                </div>
+            </a>
         </li>
     </ul>
 </form>
