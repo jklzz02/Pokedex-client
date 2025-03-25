@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {FormsModule} from '@angular/forms';
+import { BrowserModule, } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PokemonDetailComponent } from './pokemon/pokemon-detail/pokemon-detail.component';
@@ -12,6 +13,7 @@ import {
 } from 'ng2-charts';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { provideHttpClient } from '@angular/common/http';
+import { PokemonSearchComponent } from './pokemon/pokemon-search/pokemon-search.component';
 
 @NgModule({
   declarations: [
@@ -20,8 +22,9 @@ import { provideHttpClient } from '@angular/common/http';
     PokemonListComponent,
     RadarComponent,
     NotFoundComponent,
+    PokemonSearchComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, BaseChartDirective],
+  imports: [BrowserModule, AppRoutingModule, BaseChartDirective, FormsModule],
   providers: [
     provideCharts(withDefaultRegisterables()),
     provideHttpClient()

@@ -16,6 +16,10 @@ export class CacheService {
     this.cache$.next(new Map(this.cache));
   }
 
+  has(key: string): boolean {
+    return this.cache.has(key);
+  }
+
   get(key: string): any[] | undefined {
     return this.cache.get(key);
   }
