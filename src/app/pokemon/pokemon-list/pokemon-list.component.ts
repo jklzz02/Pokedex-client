@@ -33,7 +33,7 @@ export class PokemonListComponent implements OnInit, OnDestroy {
     this.route.paramMap.subscribe((params) => {
       const page = Number(params.get('page')) ?? this.firstPage;
 
-      if(Number.isNaN(page) || page < 0){
+      if(Number.isNaN(page) || page < this.firstPage || page > this.lastPage){
         this.router.navigateByUrl('not-found');
       }
 
