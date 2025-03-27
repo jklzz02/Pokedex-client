@@ -14,6 +14,7 @@ import {
 import { NotFoundComponent } from './not-found/not-found.component';
 import { provideHttpClient } from '@angular/common/http';
 import { PokemonSearchComponent } from './pokemon/pokemon-search/pokemon-search.component';
+import { PokemonSearchResultsComponent } from './pokemon/pokemon-search-results/pokemon-search-results.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { PokemonSearchComponent } from './pokemon/pokemon-search/pokemon-search.
     RadarComponent,
     NotFoundComponent,
     PokemonSearchComponent,
+    PokemonSearchResultsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BaseChartDirective, FormsModule],
   providers: [
