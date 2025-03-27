@@ -21,7 +21,6 @@ export class PokemonListComponent implements OnInit, OnDestroy {
   loading: boolean = true;
   totalPagesToCache: number = 16;
 
-
   constructor(
     private route: ActivatedRoute,
     private pokemonService: PokemonService,
