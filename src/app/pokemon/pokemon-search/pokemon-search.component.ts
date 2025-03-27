@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../../../services/pokemon.service';
 import { IPokemonSuggestion } from '../../../interfaces/i-pokemon-suggestion';
 import { CacheService } from '../../../services/cache.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pokemon-search',
@@ -13,7 +14,8 @@ export class PokemonSearchComponent implements OnInit{
 
   constructor(
     private pokemonservice: PokemonService,
-    private cacheservice: CacheService
+    private cacheservice: CacheService,
+    private router: Router
   )
   {}
 
@@ -55,5 +57,14 @@ export class PokemonSearchComponent implements OnInit{
               
             this.pokemonList = this.cacheservice.get(this.cacheKey) as IPokemonSuggestion[];
           });
+  }
+
+  submitSearch(): void 
+  {
+    if(!this.searchInput.length) {
+      return;
+    }
+
+     this.router.navigateByUrl(`pokemons/search/${this.searchInput}`)
   }
 }
