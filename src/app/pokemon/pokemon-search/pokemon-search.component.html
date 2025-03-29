@@ -5,22 +5,23 @@
             <i class="bi bi-search w-4 h-6 text-gray-500 dark:text-gray-400"></i>
         </div>
         <input
-        (input)="onSearch()" [(ngModel)]="searchInput" 
+        (input)="onSearch()" [(ngModel)]="searchInput"
+        (blur)="onSearchBlur($event)"
         type="search"
         id="pokemon-search"
         name="pokemon-search"  
         class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
         placeholder="Search Pokemon..."
          />
-        <button (click)="submitSearch()" [disabled]="!searchInput" type="submit" 
+        <button (click)="submitSearch()" [disabled]="!searchInput" data-submit="true"  type="submit" 
         class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 disabled:opacity-70 disabled:hover:bg-gray-500 disabled:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
     </div>
 
-    <ul 
-    *ngIf="suggestions.length"
+    <ul
+    *ngIf="suggestions.length && isVisible"
     class="absolute left-0 w-full bg-white border border-gray-300 rounded-lg shadow-md z-50 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
         <li class="flex gap-1 p-2 hover:bg-gray-100 dark:hover:bg-gray-600" *ngFor="let suggestion of suggestions">
-            <a class="flex gap-1 p-2 w-full" routerLink="/pokemon/{{suggestion.id}}">{{ suggestion.name }}
+            <a class="flex gap-1 p-2 w-full" data-suggestion="true" routerLink="/pokemon/{{suggestion.id}}">{{ suggestion.name }}
                 <div class="flex">
                 <img *ngFor="let type of suggestion.types" class="{{type}}-icon suggestion-icon" src="/assets/icons/{{type}}.svg" alt="">
                 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { PokemonService } from '../../../services/pokemon.service';
 import { IPokemonSuggestion } from '../../../interfaces/i-pokemon-suggestion';
 import { CacheService } from '../../../services/cache.service';
@@ -15,7 +15,7 @@ export class PokemonSearchComponent implements OnInit{
   constructor(
     private pokemonservice: PokemonService,
     private cacheservice: CacheService,
-    private router: Router
+    private router: Router,
   )
   {}
 
@@ -23,12 +23,28 @@ export class PokemonSearchComponent implements OnInit{
   suggestions: IPokemonSuggestion[] = [];
   searchInput: string = '';
   cacheKey: string = 'suggestion-list';
+  isVisible: boolean = true;
+  
 
   ngOnInit(): void {
     this.fetchSuggestionsData();
   }
 
+  onSearchBlur (event: FocusEvent) {
+
+    const relatedTarget = event.relatedTarget as HTMLElement
+
+    if (relatedTarget && (relatedTarget.hasAttribute('data-suggestion') || relatedTarget.hasAttribute('data-submit'))) {
+      return;
+    }
+  
+    this.searchInput = '';
+    this.isVisible = false;
+  }
+
   onSearch(): void{
+
+    this.isVisible = true;
 
     if(!this.searchInput.length) {
       this.suggestions = [];
@@ -59,8 +75,8 @@ export class PokemonSearchComponent implements OnInit{
           });
   }
 
-  submitSearch(): void 
-  {
+  submitSearch(): void {
+
     if(!this.searchInput.length) {
       return;
     }
