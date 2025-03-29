@@ -1,0 +1,19 @@
+<app-pokemon-search></app-pokemon-search>
+
+<div class="mx-auto grid-cols-12 justify-center p-4">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 col-span-10 md:col-span-8" *ngIf="searchResults.length && !loading">
+        <div *ngFor="let result of searchResults" class="{{result.types[0]}} shadow-md rounded-lg p-4 text-center dark:bg-gray-600">
+            <a routerLink="/pokemon/{{result.id}}" class="block">
+                <p class="font-semibold dark:text-gray-400 text-start text-lg">{{result.id}}</p>
+                <img class="w-full h-auto object-contain" src="{{ result.sprites.other['official-artwork'].front_default }}" alt="{{result.name}}">
+                <p class="mt-2 font-semibold dark:text-gray-400 text-end text-lg">{{ result.name | titlecase }}</p>
+            </a>
+        </div>
+    </div>
+</div>
+
+<h1
+class="mt-4 mx-auto text-center text-2xl dark:text-gray-400" 
+*ngIf="!searchResults.length && !loading">
+ No Results for "{{query}}"
+</h1>
