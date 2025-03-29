@@ -1,10 +1,14 @@
 <app-pokemon-search></app-pokemon-search>
 
-<ul *ngIf="searchResults.length && !loading">
-    <li *ngFor="let result of searchResults">
-        <a routerLink="/pokemon/{{result.id}}">{{ result.name }}</a>
-    </li>
-</ul>
+<div class="flex wrap" *ngIf="searchResults.length && !loading">
+    <div *ngFor="let result of searchResults">
+        <a routerLink="/pokemon/{{result.id}}">
+            {{ result.id }}
+            <img src="{{ result.sprites.other['official-artwork'].front_default }}" alt="{{result.name}}">
+            {{ result.name }}
+        </a>
+    </div>
+</div>
 
 <h2 *ngIf="!searchResults.length && !loading">
  No Results for "{{query}}"

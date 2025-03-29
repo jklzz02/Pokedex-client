@@ -25,7 +25,6 @@ export class PokemonSearchComponent implements OnInit{
   cacheKey: string = 'suggestion-list';
   isVisible: boolean = true;
   
-
   ngOnInit(): void {
     this.fetchSuggestionsData();
   }
@@ -34,7 +33,12 @@ export class PokemonSearchComponent implements OnInit{
 
     const relatedTarget = event.relatedTarget as HTMLElement
 
-    if (relatedTarget && (relatedTarget.hasAttribute('data-suggestion') || relatedTarget.hasAttribute('data-submit'))) {
+    if (relatedTarget && relatedTarget.hasAttribute('data-suggestion')) {
+      return;
+    }
+
+    if(relatedTarget && relatedTarget.hasAttribute('data-submit')) {
+      this.isVisible = false;
       return;
     }
   
