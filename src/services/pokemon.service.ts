@@ -18,6 +18,10 @@ export class PokemonService {
     return this.API.getPokemonByName(name) as Promise<IPokemon>;
   }
 
+  getPokemonById(id: number): Promise<IPokemon> {
+    return this.API.getPokemonById(id) as Promise<IPokemon>;
+  }
+
   getPokemonRange(
     minId: number = 0,
     maxId: number = 12
@@ -41,6 +45,13 @@ export class PokemonService {
         )
       )
     );
+  }
+
+  getPokemonListById (...ids: number[]): Observable<IPokemonList[]> {
+    return forkJoin(
+      ids.map( (id) => 
+         from(this.getPokemonById(id))           
+    ));
   }
 
   getPokemonSuggestionsList(): Observable<IPokemonSuggestion[]>{

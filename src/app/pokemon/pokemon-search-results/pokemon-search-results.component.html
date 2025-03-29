@@ -1,1 +1,11 @@
-<p>pokemon-search-results works!</p>
+<app-pokemon-search></app-pokemon-search>
+
+<ul *ngIf="searchResults.length && !loading">
+    <li *ngFor="let result of searchResults">
+        <a routerLink="/pokemon/{{result.id}}">{{ result.name }}</a>
+    </li>
+</ul>
+
+<h2 *ngIf="!searchResults.length && !loading">
+ No Results for "{{query}}"
+</h2>
