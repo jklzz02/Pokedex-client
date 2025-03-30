@@ -8,7 +8,7 @@
   <div *ngIf="!loading" class="grid grid-cols-12 gap-2 mx-auto justify-center">
     <div
       *ngFor="let pokemon of pokemons"
-      class="overflow-hidden max-w-sm rounded-lg shadow-sm col-span-2 {{
+      class="overflow-hidden max-w-sm rounded-lg shadow-sm lg:col-span-2 md:col-span-4 sm:col-span-6 col-span-10 {{
         pokemon.types[0].type.name
       }}"
     >
