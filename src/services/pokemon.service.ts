@@ -35,7 +35,7 @@ export class PokemonService {
                 (pokemonDetail) =>
                   ({
                     id: pokemonDetail.id,
-                    name: pokemonDetail.name,
+                    name: pokemonDetail.name.replace('-', ' '),
                     sprites: pokemonDetail.sprites,
                     types: pokemonDetail.types,
                   } as IPokemonList)
